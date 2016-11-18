@@ -5,14 +5,8 @@
 	<artifactId>lernstickTools</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- To make the output of the javadoc support utf-8 -->
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<project.maindir>${project.basedir}/src/main</project.maindir>
-	</properties>
-
 	<build>
+		<sourceDirectory>/src/</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -24,16 +18,49 @@
 			</plugin>
 
 			<plugin>
+				<!-- Make JAR file executable -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.0.2</version>
 				<configuration>
 					<archive>
-						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
+
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/ch/fhnw</source>
+								<source>src/org/freedesktop</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.github.bdeneuter</groupId>
+			<artifactId>dbus-java</artifactId>
+			<version>[2.7,]</version>
+		</dependency>
+	</dependencies>
 
 </project>
