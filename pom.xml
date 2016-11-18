@@ -36,10 +36,4 @@
 		</plugins>
 	</build>
 
-	<build>
-		<plugins>
-
-		</plugins>
-	</build>
-
 </project>
